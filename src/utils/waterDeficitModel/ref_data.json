@@ -1,0 +1,26 @@
+{
+  "cropinfo" : {
+    "grass": {"Lini": 0, "Ldev": 0, "Lmid": 240, "Llate": 0, "Kcini": 1.00, "Kcmid": 1.00, "Kcend": 1.00},
+    "cereals": {"Lini": 20, "Ldev": 35, "Lmid": 60, "Llate": 25, "Kcini": 0.30, "Kcmid": 1.15, "Kcend": 0.30},
+    "forages": {"Lini": 10, "Ldev": 15, "Lmid": 20, "Llate": 10, "Kcini": 0.40, "Kcmid": 1.20, "Kcend": 1.10},
+    "grapes": {"Lini": 30, "Ldev": 60, "Lmid": 40, "Llate": 80, "Kcini": 0.30, "Kcmid": 0.70, "Kcend": 0.45},
+    "legumes": {"Lini": 20, "Ldev": 30, "Lmid": 30, "Llate": 10, "Kcini": 0.50, "Kcmid": 1.10, "Kcend": 1.00},
+    "rootstubers": {"Lini": 20, "Ldev": 30, "Lmid": 50, "Llate": 20, "Kcini": 0.50, "Kcmid": 1.15, "Kcend": 0.70},
+    "vegsmallshort": {"Lini": 20, "Ldev": 35, "Lmid": 35, "Llate": 10, "Kcini": 0.70, "Kcmid": 1.05, "Kcend": 0.95},
+    "vegsmalllong": {"Lini": 30, "Ldev": 45, "Lmid": 75, "Llate": 30, "Kcini": 0.70, "Kcmid": 1.05, "Kcend": 0.95},
+    "vegsolanum": {"Lini": 30, "Ldev": 40, "Lmid": 80, "Llate": 30, "Kcini": 0.60, "Kcmid": 1.15, "Kcend": 0.80},
+    "vegcucumber": {"Lini": 25, "Ldev": 40, "Lmid": 35, "Llate": 20, "Kcini": 0.50, "Kcmid": 1.00, "Kcend": 0.80}
+  },
+  "soildata" : {
+    "soilmoistureoptions": {
+        "low": { "wiltingpoint": 1.0, "prewiltingpoint": 1.15, "stressthreshold": 1.5, "fieldcapacity": 2.0, "saturation": 5.0 },
+        "medium": { "wiltingpoint": 2.0, "prewiltingpoint": 2.225, "stressthreshold":2.8, "fieldcapacity": 3.5, "saturation": 5.5 },
+        "high": { "wiltingpoint": 3.0, "prewiltingpoint": 3.3, "stressthreshold":4.0, "fieldcapacity": 5.0, "saturation": 6.5 }
+    },
+    "soildrainageoptions": {
+        "low": { "daysToDrainToFcFromSat": 0.125 },
+        "medium": { "daysToDrainToFcFromSat": 1.0 },
+        "high": { "daysToDrainToFcFromSat": 2.0 }
+    }
+  }
+}
