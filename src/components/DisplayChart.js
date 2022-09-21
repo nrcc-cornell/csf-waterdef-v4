@@ -88,6 +88,16 @@ const DisplayCharts = (props) => {
                 line: {
                     animation: false
                 },
+                series: {
+                  states: {
+                    inactive: {
+                      opacity: 1
+                    },
+                    hover: {
+                      enabled: false
+                    }
+                  },
+                }
             },
             chart: {
                 spacingBottom: 10,
