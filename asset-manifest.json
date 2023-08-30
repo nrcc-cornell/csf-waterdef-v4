@@ -1,15 +1,6 @@
 {
-  "files": {
-    "main.css": "/csf-waterdef-v4/style/csf-waterdef-v4.css",
-    "main.js": "/csf-waterdef-v4/js/toolinit.js",
-    "index.html": "/csf-waterdef-v4/index.html",
-    "static/media/pin-blue.svg": "/csf-waterdef-v4/static/media/pin-blue.a84f9033aac1da64f933.svg",
-    "static/media/pin-red.svg": "/csf-waterdef-v4/static/media/pin-red.8ec759728dab1e5998f4.svg",
-    "csf-waterdef-v4.css.map": "/csf-waterdef-v4/style/csf-waterdef-v4.css.map",
-    "toolinit.js.map": "/csf-waterdef-v4/js/toolinit.js.map"
-  },
-  "entrypoints": [
-    "style/csf-waterdef-v4.css",
-    "js/toolinit.js"
-  ]
+  "main.css": "/csf-waterdef-v4/style/csf-waterdef-v4.css",
+  "main.css.map": "/csf-waterdef-v4/style/csf-waterdef-v4.css.map",
+  "main.js": "/csf-waterdef-v4/js/toolinit.js",
+  "main.js.map": "/csf-waterdef-v4/js/toolinit.js.map"
 }
