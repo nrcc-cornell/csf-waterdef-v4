@@ -48,7 +48,7 @@ const IrrigationDatePicker = (props) => {
 }
 
 IrrigationDatePicker.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   enabled: PropTypes.bool.isRequired,
   onchange: PropTypes.func.isRequired,
 };

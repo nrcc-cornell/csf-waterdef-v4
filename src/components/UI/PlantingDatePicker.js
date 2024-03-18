@@ -10,6 +10,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import moment from 'moment';
 
 const styles = theme => ({
   //root: {
@@ -31,8 +32,8 @@ const PlantingDatePicker = (props) => {
               views={["date"]}
               variant="inline"
               format="MM/dd/yyyy"
-              minDate="01/01/1980"
-              maxDate="12/31/2022"
+              minDate="01/01/2002"
+              maxDate={moment().format("12/31/YYYY")}
               PopoverProps={{style: {...{left: '180px', top: '-140px'}}}}
               margin="none"
               id="date-picker-inline"

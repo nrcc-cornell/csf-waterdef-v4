@@ -191,6 +191,8 @@ export function runWaterDeficitModel(precip,pet,initDeficit,startDate,plantingDa
     // If the number is negative, assuming Kc = Kcini for bare soil and single crop coeff method (FAO-56)
     daysSincePlanting =  Math.floor(( Date.parse(startDate) - Date.parse(plantingDate) ) / 86400000);
 
+    console.log(daysSincePlanting, startDate, plantingDate);
+
     // Loop through all days, starting with the second day (we already have the deficit for the initial day from model initialization)
     for (var idx=1; idx < pet.length; idx++) {
         // increment as we advance through the growth stages of the plant

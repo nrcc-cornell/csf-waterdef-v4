@@ -39,7 +39,7 @@ class ToolContents extends Component {
     constructor(props) {
         super(props);
         this.toolName = 'CSF-WATER';
-        this.token = 'YOUR_TOKEN';
+        this.token = 'pk.eyJ1IjoicHJlY2lwYWRtaW4iLCJhIjoiY2xkdDhlOGMxMW04NzNxbnZ6MzhiaTc5aiJ9.3U9xP_U4rruZi7XybaGLNQ';
         this.soilcapacity_list = ['high','medium','low']
         this.soilcapacity_labels = {
           'high':'High (Clay)',
@@ -64,7 +64,7 @@ class ToolContents extends Component {
           "lat":42.45,
           "lng":-76.48,
           "id":"default",
-          "planting_date":"05/15/2022",
+          "planting_date":moment().format("05/15/YYYY"),
           "soilcapacity":"high",
           "croptype":"grass",
           "irrigation_date":null,

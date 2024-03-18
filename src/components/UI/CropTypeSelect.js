@@ -9,6 +9,8 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import green from '@material-ui/core/colors/green';
+import HelpToolPopover from '../HelpToolPopover';
+import { HelpCropType } from '../HelpToolContent';
 
 const styles = theme => ({
   root: {
@@ -35,7 +37,12 @@ const CropTypeSelect = (props) => {
         return (
           <form className={classes.root} autoComplete="off">
             <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="croptype">Crop Type</InputLabel>
+              <InputLabel htmlFor="croptype">
+                <div style={{ display: 'flex', alignItems: 'center', position: 'relative', bottom: '6px' }}>
+                  <span style={{ position: 'relative', bottom: '4px' }}>Crop Type</span>
+                  <HelpToolPopover content={<HelpCropType/>} />
+                </div>
+              </InputLabel>
               <Select
                 value={props.value}
                 onChange={props.onchange}

@@ -192,9 +192,8 @@ const DisplayCharts = (props) => {
                     color: 'rgba(0,0,0,0.3)',
                     width: 2,
                     dashStyle: 'dash',
-                    //value: Date.UTC(this.getPlantingDate.year(),this.getPlantingDate.month(),this.getPlantingDate.date()),
-                    //value: moment.utc(props.locInfo['planting_date'],'MM/DD/YYYY'),
-                    value: (props.locInfo.croptype!=='grass' && props.locInfo['planting_date']) ? moment.utc(props.locInfo['planting_date'],'MM/DD/YYYY') : null,
+                    value: props.locInfo['planting_date'] ? moment.utc(props.locInfo['planting_date'],'MM/DD/YYYY') : null,
+                    // value: (props.locInfo.croptype!=='grass' && props.locInfo['planting_date']) ? moment.utc(props.locInfo['planting_date'],'MM/DD/YYYY') : null,
                     label: {
                         text: 'Planting',
                         rotation: 90,
