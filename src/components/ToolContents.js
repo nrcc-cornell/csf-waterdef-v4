@@ -89,7 +89,8 @@ class ToolContents extends Component {
     }
 
     componentDidUpdate(prevProps,prevState) {
-        if (prevState.selected!==this.state.selected) {
+        const changeYear = prevState.locations[prevState.selected]['planting_date'].slice(6)!==this.state.locations[this.state.selected]['planting_date'].slice(6);
+        if (prevState.selected!==this.state.selected || changeYear) {
           this.handleDataIsLoadingChange(true)
         }
         if (prevState.locations!==this.state.locations) { ls.set(this.toolName+'.locations',this.state.locations) }
@@ -211,7 +212,7 @@ class ToolContents extends Component {
 
                 <Grid container direction="row" justifyContent="center">
 
-                  <Grid item container direction="column" justifyContent="flex-start" spacing={1} md>
+                  <Grid item container direction="column" justifyContent="flex-start" spacing={1} md style={{ flexGrow: 0 }}>
                     <Hidden mdUp>
                         <Grid item>
                           <VarPopover content={display_UserInput} />
@@ -224,8 +225,8 @@ class ToolContents extends Component {
                     </Hidden>
                   </Grid>
 
-                  <Grid item container direction="column" justifyContent="center" alignItems="center" spacing={1} md={9}>
-                      <Grid item style={{width:'100%', height:'70vh'}}>
+                  <Grid item container direction="column" justifyContent="center" alignItems="center" spacing={1} md={9} style={{ flexGrow: 1 }}>
+                      <Grid item style={{width:'100%', height:'500px'}}>
                         {this.state.pointData &&
                           <DisplayChart
                             modeldata={modeldata}

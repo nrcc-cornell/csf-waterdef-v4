@@ -24,6 +24,7 @@ class IrrigationSelectEnable extends Component {
 
           <FormControlLabel
             control={<GreenCheckbox checked={this.props.value} onChange={this.props.onchange} name="enableTarget" />}
+            style={{ marginRight: '0px' }}
           />
 
         )

@@ -49,7 +49,7 @@ class App extends Component {
 
         return (
             <MuiThemeProvider theme={theme}>
-              <div id="container" className="App">
+              <div id="container" className="App" style={{ marginBottom: '10px' }}>
                   <ToolContents />
               </div>
             </MuiThemeProvider>

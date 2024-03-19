@@ -25,6 +25,7 @@ const styles = theme => ({
 
 const PlantingDatePicker = (props) => {
         //const { classes } = props;
+        console.log(props);
         return (
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
@@ -32,8 +33,8 @@ const PlantingDatePicker = (props) => {
               views={["date"]}
               variant="inline"
               format="MM/dd/yyyy"
-              minDate="01/01/2002"
-              maxDate={moment().format("12/31/YYYY")}
+              minDate={`03/01/2002`}
+              maxDate={`10/31/${moment().year()}`}
               PopoverProps={{style: {...{left: '180px', top: '-140px'}}}}
               margin="none"
               id="date-picker-inline"
@@ -52,6 +53,7 @@ const PlantingDatePicker = (props) => {
 }
 
 PlantingDatePicker.propTypes = {
+  seasonStartYear: PropTypes.number.isRequired,
   value: PropTypes.string.isRequired,
   onchange: PropTypes.func.isRequired,
 };

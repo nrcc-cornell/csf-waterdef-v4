@@ -9,6 +9,7 @@ import moment from 'moment';
 // Components
 import LoadPointData from './LoadPointData';
 import LoadPointDataFcst from './LoadPointDataFcst';
+import LoadPointPET from './LoadPointPET';
 
 class LoadData extends Component {
 
@@ -112,52 +113,45 @@ class LoadData extends Component {
                             data_fcst.push([dateEnd,dailyTotal])
                         }
                     })
-                    //console.log(data_fcst)
 
                     this.handleStateVarChange('precipFcstData',data_fcst)
                     this.handleStateVarChange('precipFcstDataIsLoading',false)
                   })
               })
 
-            // !!!!! MUST UPDATE BELOW WHEN ACIS PET CALLS BECOME AVAILABLE !!!!!
-            // This section below is reserved for when ACIS calls become available for PET data.
-            // For development, filler PET data (fake, but not too unreasonable) are provided.
-            // Constant daily PET values of 0.10 inches are provided for development, using arrays
-            // that are the same dimensions as precipitation obs and fcsts, from ACIS precip calls.
-            //
-            // Some items that would need changing:
-            // getAcisParamsPcpnObs --> getAcisParamsPetObs
-            // getAcisParamsPcpnFcst --> getAcisParamsPetFcst (depending on the ACIS call, if obs/fcst are not combined))
-            // "data_obs" is a variable holding daily observed PET.
-            // "data_fcst" is a variable holding daily forecasted PET.
-            // State variables "petObsData" and "petFcstData" are daily data arrays.
-            LoadPointData({param:this.getAcisParamsPcpnObs()})
-              .then(response_obs => {
+            // Determine year of PET to retrieve
+            const currLoc = this.props.locations[this.props.selected];
+            const plantYear = moment(currLoc['planting_date'], 'MM/DD/YYYY').year();
+            const thisYear = moment().year();
+            const thisMonth = moment().month();
+            let targetYear = plantYear <= thisYear ? plantYear : thisYear;
+            if (thisYear === targetYear && (thisMonth===0 || thisMonth===1)) {
+              targetYear = targetYear - 1;
+            }
 
-                //handle observed data
-                let data_obs = response_obs['data']
-                data_obs = data_obs.filter(item => item[1] !== -999)
-                let last_obs_date = data_obs.slice(-1)[0][0]
-		// Force PET 0.10 daily for development. Will handle when call to PET is available.
-		data_obs = data_obs.map(item => [item[0],0.10]);
+            // Fetches PET data from irrigation API
+            LoadPointPET({ loc: currLoc, year: targetYear})
+              .then(response_pet => {
+                const processPetData = (dateArr, valuesArr, year) => {
+                  const results = [];
+                  for (let i = 0; i < dateArr.length; i++) {
+                    const date = moment(`${dateArr[i]}/${year}`, 'MM/DD/YYYY').format('YYYY-MM-DD');
+                    const pet_value = valuesArr[i];
+                    results.push([date, pet_value]);
+                  }
+                  return results;
+                };
 
+                // convert observed and forecasted values to [date, value][] format
+                const data_obs = processPetData(response_pet['dates_pet'], response_pet['pet'], targetYear);
+                const data_fcst = processPetData(response_pet['dates_pet_fcst'], response_pet['pet_fcst'], targetYear);
+
+                // update state
                 this.handleStateVarChange('petObsData',data_obs)
                 this.handleStateVarChange('petObsDataIsLoading',false)
-
-                LoadPointDataFcst({param:this.getAcisParamsPcpnFcst(last_obs_date)})
-                  .then(response_fcst => {
-
-                    // Force PET 0.10 daily for development. Will handle when call to PET is available.
-                    let fcst_date_1 = moment(last_obs_date, "YYYY-MM-DD").add(1, 'days').format('YYYY-MM-DD')
-                    let fcst_date_2 = moment(last_obs_date, "YYYY-MM-DD").add(2, 'days').format('YYYY-MM-DD')
-                    let fcst_date_3 = moment(last_obs_date, "YYYY-MM-DD").add(3, 'days').format('YYYY-MM-DD')
-                    let data_fcst = [[fcst_date_1,0.10],[fcst_date_2,0.10],[fcst_date_3,0.10]]
-
-                    this.handleStateVarChange('petFcstData',data_fcst)
-                    this.handleStateVarChange('petFcstDataIsLoading',false)
-                  })
+                this.handleStateVarChange('petFcstData',data_fcst)
+                this.handleStateVarChange('petFcstDataIsLoading',false)
               })
-            // !!!!! MUST UPDATE ABOVE WHEN ACIS PET CALLS BECOME AVAILABLE !!!!!
 
             },
             1000

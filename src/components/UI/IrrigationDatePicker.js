@@ -10,6 +10,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import moment from 'moment';
 
 const styles = theme => ({
   //root: {
@@ -28,8 +29,8 @@ const IrrigationDatePicker = (props) => {
               views={["date"]}
               variant="inline"
               format="MM/dd/yyyy"
-              minDate="01/01/1980"
-              maxDate="12/31/2022"
+              minDate={`03/01/${props.seasonStartYear}`}
+              maxDate={`10/31/${props.seasonStartYear}`}
               PopoverProps={{style: {...{left: '180px', top: '-140px'}}}}
               margin="none"
               id="date-picker-inline"
@@ -38,6 +39,7 @@ const IrrigationDatePicker = (props) => {
               onChange={props.onchange}
               autoOk={true}
               InputProps={{ readOnly: false }}
+              InputLabelProps={{ shrink: true }}
               KeyboardButtonProps={{
                 'aria-label': 'change irrigation date',
               }}
@@ -48,6 +50,7 @@ const IrrigationDatePicker = (props) => {
 }
 
 IrrigationDatePicker.propTypes = {
+  seasonStartYear: PropTypes.number.isRequired,
   value: PropTypes.string,
   enabled: PropTypes.bool.isRequired,
   onchange: PropTypes.func.isRequired,

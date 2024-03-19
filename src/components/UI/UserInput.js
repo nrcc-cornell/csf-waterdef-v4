@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 //import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import moment from 'moment';
 
 // Components
 import SoilWaterCapacitySelect from './SoilWaterCapacitySelect';
@@ -20,6 +21,13 @@ import IrrigationDatePicker from './IrrigationDatePicker';
 class UserInput extends React.Component {
 
   render() {
+    const plantYear = moment(this.props.locations[this.props.selected]['planting_date'], 'MM/DD/YYYY').year();
+    const thisYear = moment().year();
+    const thisMonth = moment().month();
+    let targetYear = plantYear <= thisYear ? plantYear : thisYear;
+    if (thisYear === targetYear && (thisMonth===0 || thisMonth===1)) {
+      targetYear = targetYear - 1;
+    }
 
     return (
       <Box padding={2} border={0} borderRadius={4} borderColor="primary.main">
@@ -50,10 +58,11 @@ class UserInput extends React.Component {
                           <PlantingDatePicker
                             value={this.props.locations[this.props.selected]['planting_date']}
                             onchange={this.props.onchange_plantingDate}
+                            seasonStartYear={targetYear}
                           />
                         </Grid>
 
-                        <Grid item container direction="row" justifyContent="center" alignItems="flex-end">
+                        <Grid item container direction="row" justifyContent="center" alignItems="center">
                           <IrrigationSelectEnable
                             value={this.props.irrigationIsEnabled}
                             onchange={this.props.onchange_irrigationIsEnabled}
@@ -62,6 +71,7 @@ class UserInput extends React.Component {
                             value={this.props.locations[this.props.selected]['irrigation_date']}
                             enabled={this.props.irrigationIsEnabled}
                             onchange={this.props.onchange_irrigationDate}
+                            seasonStartYear={targetYear}
                           />
                         </Grid>
                       </Grid>
