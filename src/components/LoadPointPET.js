@@ -1,14 +1,7 @@
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-import fetchJsonp from 'fetch-jsonp';
 import PropTypes from 'prop-types';
 
-const protocol = window.location.protocol;
-
 const LoadPointPET = ({loc, year}) => {
-  return fetchJsonp(`${protocol}//tools.climatesmartfarming.org/irrigationtool/datahdf5/?lat=${loc['lat']}&lon=${loc['lng']}&year=${year}`, {
-    jsonpCallback: 'callback'
-  })
+  return fetch(`http://csf-irrigation-api-worker.rcc-acis.workers.dev/?lat=${loc['lat']}&lon=${loc['lng']}&year=${year}`, { headers: { 'Authorization': 'api-4a0607-token' } })
     .then(r => r.json())
     .then(data => {
       console.log(data);
